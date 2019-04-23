@@ -1,0 +1,33 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Feb 17 14:13:40 2019
+
+@author: alan
+"""
+
+from vidstab import VidStab
+import matplotlib.pyplot as plt
+import time
+import os
+
+VIDEO_NAME = 'VID_20161216_191922.mp4'
+PATH_TO_VIDEO = os.path.join('Videos','Input', VIDEO_NAME)
+PATH_TO_OUT_VIDEO = os.path.join('Videos','Stable',VIDEO_NAME)
+
+Start_Time=time.time()
+#stabilizer = VidStab(kp_method='FAST', threshold=42, nonmaxSuppression=False)
+stabilizer = VidStab()
+stabilizer.stabilize(input_path=PATH_TO_VIDEO, output_path=PATH_TO_OUT_VIDEO)
+
+
+duration = time.time() - Start_Time
+
+print("Average Runtime: {0:.2f}s".format(duration))
+
+
+stabilizer.plot_trajectory()
+plt.show()
+
+stabilizer.plot_transforms()
+plt.show()
